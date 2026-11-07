@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LeadFlow - Professional Leadership Lead Management Dashboard">
+    <title>LeadFlow | Lead Management</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">L</div>
+            <div>
+                <h2>LeadFlow</h2>
+                <span>Lead Management</span>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <span class="section-label">WORKSPACE</span>
+
+            <nav class="navigation">
+                <a href="#dashboard" class="nav-link active" data-page="dashboard">
+                    <span>▦</span> Dashboard
+                </a>
+
+                <a href="#collection" class="nav-link" data-page="collection">
+                    <span>⌕</span> Lead Collection
+                </a>
+
+                <a href="#leads" class="nav-link" data-page="leads">
+                    <span>☷</span> All Leads
+                </a>
+
+                <a href="#integrations" class="nav-link" data-page="integrations">
+                    <span>⚙</span> Integrations
+                </a>
+            </nav>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="avatar">LF</div>
+                <div>
+                    <strong>Administrator</strong>
+                    <span>Workspace Owner</span>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div>
+                <h3>Lead Management</h3>
+                <p>Manage and organize your leadership prospects.</p>
+            </div>
+
+            <div class="topbar-right">
+                <span class="system-status">
+                    <span class="status-dot"></span>
+                    System Ready
+                </span>
+            </div>
+        </header>
+
+        <!-- DASHBOARD PAGE -->
+        <section class="page active" id="dashboard">
+
+            <div class="page-heading">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Overview of your lead generation activity.</p>
+                </div>
+
+                <button class="primary-button" data-navigate="collection">
+                    + New Collection
+                </button>
+            </div>
+
+            <!-- STATISTICS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span class="stat-label">Total Prospects</span>
+                    <h2 id="totalLeads">0</h2>
+                    <span class="stat-description">All imported profiles</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">Qualified Leads</span>
+                    <h2 id="qualifiedLeads">0</h2>
+                    <span class="stat-description">Matching job titles</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">Collections</span>
+                    <h2 id="totalCollections">0</h2>
+                    <span class="stat-description">Completed runs</span>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">System Status</span>
+                    <h2 class="status-text" id="systemStatus">Ready</h2>
+                    <span class="stat-description">Automation connection</span>
+                </div>
+
+            </div>
+
+            <!-- QUICK ACTION -->
+            <div class="content-card quick-action">
+                <div>
+                    <span class="eyebrow">QUICK ACTION</span>
+                    <h2>Start a new lead collection</h2>
+                    <p>Select leadership titles, connect your data source and process matching profiles.</p>
+                </div>
+
+                <button class="primary-button" data-navigate="collection">
+                    Start Collection →
+                </button>
+            </div>
+
+            <!-- RECENT ACTIVITY -->
+            <div class="content-card">
+                <div class="card-heading">
+                    <div>
+                        <h2>Recent Activity</h2>
+                        <p>Your latest collection history.</p>
+                    </div>
+                </div>
+
+                <div id="activityList" class="empty-state">
+                    <div class="empty-icon">◷</div>
+                    <h3>No activity yet</h3>
+                    <p>Your collection history will appear here.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- LEAD COLLECTION PAGE -->
+        <section class="page" id="collection">
+
+            <div class="page-heading">
+                <div>
+                    <h1>Lead Collection</h1>
+                    <p>Configure your leadership prospect search.</p>
+                </div>
+            </div>
+
+            <div class="content-card form-card">
+
+                <h2>Collection Settings</h2>
+                <p class="form-description">Choose the job titles you want to collect.</p>
+
+                <div class="form-group">
+                    <label>Leadership Designations</label>
+
+                    <div class="checkbox-grid">
+
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="designation" value="CEO" checked>
+                            <span>CEO</span>
+                        </label>
+
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="designation" value="Founder" checked>
+                            <span>Founder</span>
+                        </label>
+
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="designation" value="Co-Founder" checked>
+                            <span>Co-Founder</span>
+                        </label>
+
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="designation" value="Chairman" checked>
+                            <span>Chairman</span>
+                        </label>
+
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="designation" value="Co-Chairman" checked>
+                            <span>Co-Chairman</span>
+                        </label>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dataSource">Data Source</label>
+
+                    <select id="dataSource">
+                        <option value="api">Authorized API / Data Provider</option>
+                        <option value="csv">CSV File Upload</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="apiSettings">
+                    <label for="webhookUrl">n8n Webhook URL</label>
+                    <input
+                        type="url"
+                        id="webhookUrl"
+                        placeholder="https://your-n8n-domain/webhook/..."
+                    >
+                    <small>Enter your configured n8n production webhook URL.</small>
+                </div>
+
+                <div class="form-group hidden" id="csvSettings">
+                    <label for="csvFile">Upload Profile Data (CSV)</label>
+                    <input type="file" id="csvFile" accept=".csv,text/csv">
+                    <small>CSV should contain profile name, title, company and LinkedIn URL.</small>
+                </div>
+
+                <div class="form-actions">
+                    <button class="primary-button" id="startAutomation">
+                        ▶ Start Automation
+                    </button>
+                </div>
+
+                <div id="collectionMessage" class="message hidden" role="status"></div>
+
+            </div>
+
+            <!-- PROGRESS -->
+            <div class="content-card progress-card">
+                <div class="card-heading">
+                    <div>
+                        <h2>Collection Progress</h2>
+                        <p id="progressText">Waiting for automation.</p>
+                    </div>
+                    <span id="progressPercentage">0%</span>
+                </div>
+
+                <div class="progress-track">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ALL LEADS PAGE -->
+        <section class="page" id="leads">
+
+            <div class="page-heading">
+                <div>
+                    <h1>All Leads</h1>
+                    <p>View and manage your collected prospects.</p>
+                </div>
+
+                <button class="secondary-button" id="exportLeads">
+                    ↓ Export CSV
+                </button>
+            </div>
+
+            <div class="content-card">
+
+                <div class="table-toolbar">
+                    <input
+                        type="search"
+                        id="leadSearch"
+                        placeholder="Search name, company or title..."
+                    >
+
+                    <span id="leadCount">0 records</span>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Designation</th>
+                                <th>Company</th>
+                                <th>Location</th>
+                                <th>LinkedIn Profile</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="leadsTableBody">
+                            <tr>
+                                <td colspan="5" class="table-empty">
+                                    No leads available. Start a collection first.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- INTEGRATIONS PAGE -->
+        <section class="page" id="integrations">
+
+            <div class="page-heading">
+                <div>
+                    <h1>Integrations</h1>
+                    <p>Manage your external service connections.</p>
+                </div>
+            </div>
+
+            <div class="integration-grid">
+
+                <div class="content-card integration-card">
+                    <div class="integration-icon linkedin-icon">in</div>
+                    <h2>LinkedIn Data Source</h2>
+                    <p>Connect an authorized data provider to receive profile information.</p>
+                    <span class="connection-label" id="linkedinStatus">Not configured</span>
+                </div>
+
+                <div class="content-card integration-card">
+                    <div class="integration-icon sheets-icon">▤</div>
+                    <h2>Google Sheets</h2>
+                    <p>Save qualified leadership prospects to your Google spreadsheet.</p>
+                    <span class="connection-label" id="sheetsStatus">Configure in n8n</span>
+                </div>
+
+                <div class="content-card integration-card">
+                    <div class="integration-icon n8n-icon">n8n</div>
+                    <h2>n8n Automation</h2>
+                    <p>Process incoming data and filter matching leadership titles.</p>
+                    <span class="connection-label" id="n8nStatus">Not connected</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="app-footer">
+            <span>LeadFlow · Lead Management System</span>
+            <span>Version 1.0</span>
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>
+
